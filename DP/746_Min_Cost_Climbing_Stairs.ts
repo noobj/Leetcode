@@ -108,3 +108,5 @@ function main() {
 }
 
 main();
+
+export const fake = 123;

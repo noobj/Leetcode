@@ -2,6 +2,5 @@ node_modules
 .idea
 .vscode
 test.*
-*.json
 *.lock
 dist/

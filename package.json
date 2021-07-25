@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": ".eslintrc.js",
-  "dependencies": {},
+  "dependencies": {
+    "yargs": "^17.0.1"
+  },
   "devDependencies": {
     "@types/node": "^16.4.0",
+    "@types/yargs": "^17.0.2",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "eslint": "^7.31.0",
@@ -16,6 +19,7 @@
     "typescript": "^4.3.5"
   },
   "scripts": {
+    "create": "node dist/tools/turn_title_to_file.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,5 +1,5 @@
 function dummyfunction() {
-};
+}
 
 function main() {
     const hrstart = process.hrtime();

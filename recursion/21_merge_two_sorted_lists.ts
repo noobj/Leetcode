@@ -5,7 +5,6 @@ function mergeTwoLists(l1: ListNode | null, l2: ListNode | null): ListNode | nul
     if (l2 == null) return l1;
 
     let current: ListNode | null = l1;
-    const pre = new ListNode(0, l2);
     while (current != null) {
         const tmp: ListNode | null = current.next;
         current.next = null;

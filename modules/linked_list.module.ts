@@ -26,3 +26,16 @@ export function printList(list: ListNode | null) {
     str += '->null';
     console.log(str);
 }
+
+export function printListCircular(list: ListNode | null) {
+    if (list == null) return;
+
+    const head = list;
+    let str = list.val.toString();
+    while (list.next != null && list.next != head) {
+        list = list.next;
+        str += '->' + list.val.toString();
+    }
+    str += '->...';
+    console.log(str);
+}

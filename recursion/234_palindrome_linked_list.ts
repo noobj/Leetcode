@@ -1,20 +1,22 @@
-import { ListNode, printList, turnNumberIntoList } from '../modules/linked_list.module';
+import { ListNode, turnNumberIntoList } from '../modules/linked_list.module';
 
 function isPalindrome(head: ListNode | null): boolean {
-    let fast = head,
-        slow = head;
+    let fast: ListNode | null | undefined = head,
+        slow: ListNode | null | undefined = head;
     while (fast != undefined || fast != null) {
         fast = fast?.next?.next;
-        slow = slow.next;
+        slow = slow?.next;
     }
+
+    slow = slow === undefined ? null : slow;
 
     slow = reverseList(slow);
 
     while (slow != null) {
-        if (slow.val != head.val) return false;
+        if (slow.val != head?.val) return false;
 
         slow = slow.next;
-        head = head.next;
+        head = head?.next;
     }
 
     return true;

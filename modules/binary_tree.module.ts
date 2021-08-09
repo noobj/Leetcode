@@ -16,6 +16,8 @@ export function turnArrayIntoTree(
     let root = null;
     // Base case for recursion
     if (i < nums.length) {
+        if (nums[i] == null) return null;
+
         const temp = new TreeNode(nums[i]);
         root = temp;
 

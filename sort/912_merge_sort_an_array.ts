@@ -1,3 +1,5 @@
+import { bigRandomArray, bigDecreasingArray } from '../modules/big_array';
+
 function sortArray(nums: number[]): number[] {
     if (nums.length <= 1) return nums;
 
@@ -27,7 +29,7 @@ function merge(left: number[], right: number[]): number[] {
 
 function main() {
     const hrstart = process.hrtime();
-    console.log(sortArray([5, 1, 1, 2, 0, 0]));
+    console.log(sortArray(bigDecreasingArray));
     const hrend = process.hrtime(hrstart);
     console.log(`Took ${hrend[1] / 1000000} milliseconds.`);
 }

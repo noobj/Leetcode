@@ -8,7 +8,7 @@ function constructBalanceBinaryTree(nums: number[]): TreeNode | null {
     if (nums.length == 0) return null;
     if (nums.length == 1) return new TreeNode(nums[0], null, null);
 
-    let midIndex = Math.floor(nums.length / 2);
+    const midIndex = Math.floor(nums.length / 2);
 
     const node = new TreeNode(nums[midIndex], null, null);
 

@@ -7,6 +7,42 @@ export class TreeNode {
         this.left = left === undefined ? null : left;
         this.right = right === undefined ? null : right;
     }
+
+    public search(target: number): TreeNode | null {
+        let cur = this as TreeNode;
+        while (cur != null && cur.val != target) {
+            if (cur.val < target) cur = cur.right;
+            else cur = cur.left;
+        }
+
+        return cur;
+    }
+
+    public add(target: number): TreeNode {
+        let cur = this as TreeNode;
+
+        while (true) {
+            if (cur != null) {
+                if (target >= cur.val) {
+                    if (cur.right) cur = cur.right;
+                    else {
+                        cur.right = new TreeNode(target);
+                        break;
+                    }
+                } else {
+                    if (cur.left) cur = cur.left;
+                    else {
+                        cur.left = new TreeNode(target);
+                        break;
+                    }
+                }
+            } else {
+                cur = new TreeNode(target);
+            }
+        }
+
+        return this;
+    }
 }
 
 export function turnArrayIntoTree(

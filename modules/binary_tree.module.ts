@@ -43,6 +43,51 @@ export class TreeNode {
 
         return this;
     }
+
+    public inOrderSuccessor(node: TreeNode): TreeNode {
+        if (node.right != null) return this.minNode(node);
+
+        let cur = this as TreeNode;
+        let succ: TreeNode = null;
+        while (cur != null) {
+            if (cur.val > node.val) {
+                succ = cur;
+                cur = cur.left;
+            } else if (cur.val < node.val) {
+                cur = cur.right;
+            } else break;
+        }
+
+        return succ;
+    }
+
+    public minNode(node: TreeNode): TreeNode {
+        while (node.left != null) node = node.left;
+
+        return node;
+    }
+
+    public remove(key: number): TreeNode {
+        if (!this) return null;
+        if (key === this.val) {
+            if (this.right == null && this.left == null) return null;
+            if (!this.right) {
+                return this.left;
+            } else if (!this.left) {
+                return this.right;
+            } else {
+                const min = this.minNode(this.right);
+                this.right = this.right.remove(min.val);
+                this.val = min.val;
+            }
+        } else if (key > this.val) {
+            this.right = this.right ? this.right.remove(key) : null;
+        } else {
+            this.left = this.left ? this.left.remove(key) : null;
+        }
+
+        return this;
+    }
 }
 
 export function turnArrayIntoTree(

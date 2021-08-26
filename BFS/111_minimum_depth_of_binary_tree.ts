@@ -36,18 +36,6 @@ function helper(root: TreeNode, level: number): number {
 function main() {
     const hrstart = process.hrtime();
     console.log(minDepthDFS(turnArrayIntoTree([3, 9, 20, null, null, 15, 7], 0)));
-    const a = turnArrayIntoTree([100], 0);
-    console.log(a.search(2));
-    console.log(a.add(99));
-    console.log(a.add(98));
-    console.log(a.add(97));
-    console.log(a.add(96));
-    console.log(a.add(95));
-    console.log(a.add(94));
-    console.log(a.add(93));
-    console.log(a.add(92));
-    console.log(a.add(91));
-    console.log(a.add(90));
     const hrend = process.hrtime(hrstart);
     console.log(`Took ${hrend[1] / 1000000} milliseconds.`);
 }

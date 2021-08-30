@@ -1,22 +1,22 @@
-export class MapTreeNode {
-    val: number | null;
+export class MapTreeNode<K, V> {
+    val: V | null;
     key: number | null;
-    left: MapTreeNode | null;
-    right: MapTreeNode | null;
+    left: MapTreeNode<K, V> | null;
+    right: MapTreeNode<K, V> | null;
     constructor(
         key?: number | null,
-        val?: number | null,
-        left?: MapTreeNode | null,
-        right?: MapTreeNode | null
+        val?: V | null,
+        left?: MapTreeNode<K, V> | null,
+        right?: MapTreeNode<K, V> | null
     ) {
         this.key = key === undefined ? 0 : key;
-        this.val = val === undefined ? 0 : val;
+        this.val = val === undefined ? null : val;
         this.left = left === undefined ? null : left;
         this.right = right === undefined ? null : right;
     }
 
-    public search(target: number): number | null {
-        let cur = this as MapTreeNode;
+    public search(target: number): V | null {
+        let cur = this as MapTreeNode<K, V>;
         while (cur != null && cur.key != target) {
             if (cur.key < target) cur = cur.right;
             else cur = cur.left;
@@ -25,8 +25,8 @@ export class MapTreeNode {
         return cur ? cur.val : null;
     }
 
-    public add(key: number, val: number): MapTreeNode {
-        let cur = this as MapTreeNode;
+    public add(key: number, val: V): MapTreeNode<K, V> {
+        let cur = this as MapTreeNode<K, V>;
 
         while (true) {
             if (cur != null) {
@@ -55,13 +55,13 @@ export class MapTreeNode {
         return this;
     }
 
-    public minNode(node: MapTreeNode): MapTreeNode {
+    public minNode(node: MapTreeNode<K, V>): MapTreeNode<K, V> {
         while (node.left != null) node = node.left;
 
         return node;
     }
 
-    public remove(key: number): MapTreeNode {
+    public remove(key: number): MapTreeNode<K, V> {
         if (!this) return null;
         if (key === this.key) {
             if (this.right == null && this.left == null) return null;
@@ -85,7 +85,7 @@ export class MapTreeNode {
     }
 }
 
-export class HashMap {
+export class HashMap<K = number, V = number> implements Iterable<MapTreeNode<K, V>> {
     private hashMap;
     static readonly HASH_SIZE = 769;
 
@@ -93,25 +93,49 @@ export class HashMap {
         this.hashMap = new Array(769).fill(null);
     }
 
-    put(key: number, val: number) {
+    [Symbol.iterator]() {
+        let pointer = 0;
+        const hashMap = this.hashMap;
+
+        return {
+            next(): IteratorResult<MapTreeNode<K, V>> {
+                if (pointer < hashMap.length) {
+                    while (hashMap[pointer] == null && pointer < hashMap.length)
+                        pointer++;
+
+                    return {
+                        done: pointer < hashMap.length ? false : true,
+                        value: pointer < hashMap.length ? hashMap[pointer++] : null
+                    };
+                } else {
+                    return {
+                        done: true,
+                        value: null
+                    };
+                }
+            }
+        };
+    }
+
+    put(key: number, val: V) {
         const hashValue = key % HashMap.HASH_SIZE;
 
         if (this.hashMap[hashValue] == null)
-            this.hashMap[hashValue] = new MapTreeNode(key, val);
+            this.hashMap[hashValue] = new MapTreeNode<K, V>(key, val);
         else {
             this.hashMap[hashValue].add(key, val);
         }
     }
 
-    get(key: number): number {
+    get(key: number): V | null {
         const hashValue = key % HashMap.HASH_SIZE;
 
-        if (this.hashMap[hashValue] == null) return -1;
+        if (this.hashMap[hashValue] == null) return null;
 
         const val = this.hashMap[hashValue].search(key);
         if (val != null) return val;
 
-        return -1;
+        return null;
     }
 
     remove(key: number) {

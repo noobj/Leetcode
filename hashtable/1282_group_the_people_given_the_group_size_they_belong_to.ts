@@ -29,7 +29,7 @@ function groupThePeople(groupSizes: number[]): number[][] {
 
 function main() {
     const hrstart = process.hrtime();
-    console.log(groupThePeople([2,1,3,3,3,2]));
+    console.log(groupThePeople([2, 1, 3, 3, 3, 2]));
     const hrend = process.hrtime(hrstart);
     console.log(`Took ${hrend[1] / 1000000} milliseconds.`);
 }

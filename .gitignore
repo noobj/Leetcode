@@ -4,3 +4,4 @@ node_modules
 test.*
 *.lock
 dist/
+bin/

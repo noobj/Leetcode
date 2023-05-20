@@ -1,7 +1,7 @@
 class AddBinary67 {
     public String addBinary(String a, String b) {
         int indexA = a.length() - 1, indexB = b.length() - 1;
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int fromPrev = 0;
         while (indexA >= 0 || indexB >= 0) {
             int valueA = 0;
@@ -11,19 +11,19 @@ class AddBinary67 {
             int tmpRes =  valueA + valueB + fromPrev;
             switch (tmpRes) {
                 case 0 -> {
-                    result = "0" + result;
+                    result.append("0");
                     fromPrev = 0;
                 }
                 case 1 -> {
-                    result = "1" + result;
+                    result.append("1");
                     fromPrev = 0;
                 }
                 case 2 -> {
-                    result = "0" + result;
+                    result.append("0");
                     fromPrev = 1;
                 }
                 case 3 -> {
-                    result = "1" + result;
+                    result.append("1");
                     fromPrev = 1;
                 }
             }
@@ -33,9 +33,9 @@ class AddBinary67 {
             indexB--;
         }
 
-        if (fromPrev == 1) result = "1" + result;
+        if (fromPrev == 1) result.append("1");
 
-        return result;
+        return result.reverse().toString();
     }
 
     public static void main(String[] args) {

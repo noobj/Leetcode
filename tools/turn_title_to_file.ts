@@ -8,7 +8,7 @@ const argv = yargs(process.argv.slice(2))
     .demandOption(['_'])
     .options({
         e: { type: 'string', default: 'ts', alias: 'extend' },
-        c: { type: 'string', default: '.', alias: 'category' }
+        c: { type: 'string', default: '.', alias: 'category' },
     })
     .help('h')
     .alias('h', 'help')
